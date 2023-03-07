@@ -7,6 +7,7 @@ import {
   getTasks,
   loadTasks,
   getTasksLoadingStatus,
+  createTask,
 } from "./store/task"
 import congigureStore from "./store/store"
 import { Provider, useDispatch, useSelector } from "react-redux"
@@ -23,6 +24,12 @@ const App = () => {
   useEffect(() => {
     dispatch(loadTasks())
   }, [])
+
+  const addNewTask = () => {
+    dispatch(
+      createTask({ userId: 1, title: "Some New Task", completed: false })
+    )
+  }
 
   const changeTitle = (taskId) => {
     dispatch(titleChanged(taskId))
@@ -41,6 +48,7 @@ const App = () => {
   return (
     <>
       <h1> Hey!</h1>
+      <button onClick={addNewTask}>Add task</button>
       <ul>
         {state.map((el) => (
           <li key={el.id}>
